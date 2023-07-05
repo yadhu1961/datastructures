@@ -2,99 +2,171 @@
 #include <memory>
 #include <cstdint>
 
-#define NODES_COUNT 100
-class Node 
+template<typename T>
+class LinkedList
 {
+    struct Node
+    {
+        explicit Node(T valueIn )
+        : value{valueIn}
+        {}
+
+      T value;
+      Node* next{nullptr};
+    };
+
 public:
-    int value;
-    Node* next;
-
-    ~Node()
+    void print_list()
     {
-        if(next != nullptr) {
-            free(next);
+        if(head == nullptr) {
+            return;
         }
+
+        Node* curr = head;
+        while(curr != NULL)
+        {
+            std::cout<<"value: "<<curr->value<<", address: "<<curr << ", next: "<<curr->next <<std::endl;
+            curr = curr->next;
+        }
+        std::cout<<std::endl;
     }
+
+    bool addElement(T&& value) { 
+
+        auto checkNewPointer = [](Node* ptr) {
+          if(ptr == nullptr)
+          {
+            std::cout << "Error: Memory allocation failed, couldn't add element\n";
+            return false;
+          }
+        };
+
+        if(head == nullptr) { 
+            head = new Node(value);
+            return checkNewPointer(head) ? true : false;
+        }
+
+        Node* end = head;
+        while(end->next != nullptr) { end = end->next; }
+
+        end->next = new Node(value);
+        return checkNewPointer(end->next) ? true : false;
+     }
+
+    /**
+     * @brief Reverses the singly linked list and returns the new head
+     * 
+     */
+    bool reverseList()
+    {
+        if(head == nullptr || head->next == nullptr) {
+            std::cout <<"List is empty, hence cannot be reversed"<<std::endl;
+            return false;
+        }
+
+        Node* prev = head;
+        Node* curr  = head->next;
+        Node* next = curr->next;
+
+        head->next = nullptr;
+        while(curr != nullptr)
+        {
+            // std::cout<<"Exchanginging the nodes"<<std::endl;
+            Node* currNext = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = currNext;
+        }
+        head = prev;
+        return true;
+    }
+
+    /**
+     * @brief Reverses the singly linked list and returns the new head
+     * 
+     * @param head 
+     */
+    bool deleteNodeGivenValue(int value)
+    {
+        if(head == nullptr) {
+            std::cout <<"List is empty, hence element cannot be deleted"<<std::endl;
+            return false;
+        }
+
+        if(head->value == value) { 
+            Node* newHead = head->next;
+            free(head);
+            head = newHead;
+            return true;
+        }
+
+        Node* prev  = head;
+        Node* curr  = head->next;
+
+        while(curr != nullptr)
+        {
+            if(curr->value == value) {
+              prev->next = curr->next;
+              free(curr);
+              return true;
+            }
+            prev = curr;
+            curr = curr->next;
+        }
+        std::cout << "Element not found hence not deleted\n";
+        return false; // when element not found, hence cannot be deleted
+    }
+
+    // bool sort()
+    // {
+    //     if(head->next == nullptr) { return true; }
+
+    //     Node* prev = head;
+    //     Node* curr = head->next;
+    //     Node* next = curr->next;
+    //     while(curr != nullptr)
+    //     {
+
+
+    //     }
+    // }
+
+  private:
+    Node* head;
 };
-
-void print_list(Node* head)
-{
-    if(head == nullptr) {
-        std::cout<<"empty list"<<std::endl;
-        return;
-    }
-
-    Node* curr = head;
-    while(curr != NULL)
-    {
-        std::cout<<curr->value<<", address: "<<curr << ", next: "<<curr->next <<std::endl;
-        curr = curr->next;
-    }
-    std::cout<<std::endl;
-}
-
-Node* createList(std::uint32_t listSize)
-{
-    if(listSize == 0) {
-        std::cout <<"List can be created only with nonzero size"<<std::endl;
-        return nullptr;
-    }
-
-    Node* head = new Node();
-    head->value = 0;
-    head->next = nullptr;
-    Node* curr = head;
-    for(std::uint32_t counter = 1; counter < listSize; ++counter)
-    {
-        curr->next = new Node();
-        curr = curr->next;
-        curr->value = counter;
-    }
-    return head; // returning the head of the list
-}
-
-/**
- * @brief Reverses the singly linked list and returns the new head
- * 
- * @param head 
- */
-Node* reverseList(Node* head)
-{
-    if(head == nullptr || head->next == nullptr) {
-        std::cout <<"List is empty"<<std::endl;
-        return head;
-    }
-
-    Node* prev = head;
-    Node* curr  = head->next;
-    head->next = nullptr;
-    Node* next = curr->next;
-
-    while(curr != nullptr)
-    {
-        // std::cout<<"Exchanginging the nodes"<<std::endl;
-        Node* currNext = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = currNext;
-    }
-    return prev;
-}
 
 int main() {
     std::cout << "!!!Hello World to reverse linked list!!!" << std::endl; // print
 
-    Node* head = createList(0);
+    LinkedList<int> list = LinkedList<int>();
 
-    print_list(head);
+    list.addElement(1);
 
-    head = createList(10);
+    list.print_list();
 
-    print_list(head);
+    list.addElement(2);
 
-    head = reverseList(head);
+    list.print_list();
 
-    print_list(head);
+    list.addElement(3);
+
+    list.print_list();
+
+    list.reverseList();
+
+    list.print_list();
+
+    list.deleteNodeGivenValue(3);
+
+    list.print_list();
+
+    list.deleteNodeGivenValue(10);
+
+    list.print_list();
+
+    list.deleteNodeGivenValue(1);
+
+    list.print_list();
 
     return 0;
 }

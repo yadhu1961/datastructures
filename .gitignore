@@ -50,4 +50,5 @@ _deps
 */*.settings/
 *.project
 *.vscode/
+build
 bin

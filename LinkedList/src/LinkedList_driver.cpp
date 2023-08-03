@@ -4,41 +4,41 @@
 
 int main()
 {
-    std::cout << "!!!Hello World to reverse linked list!!!" << std::endl; // print
+  std::cout << "!!!Hello World to reverse linked list!!!" << std::endl;   // print
 
-    LinkedList<int> list = LinkedList<int>();
+  LinkedList<int> list = LinkedList<int>();
 
-    list.addElement(2);
+  list.addElement(2);
 
-    list.print_list();
+  list.print_list();
 
-    list.addElement(3);
+  list.addElement(3);
 
-    list.print_list();
+  list.print_list();
 
-    list.addElement(1);
+  list.addElement(1);
 
-    list.print_list();
+  list.print_list();
 
-    list.reverseList();
+  list.reverseList();
 
-    list.print_list();
+  list.print_list();
 
-    list.sort();
+  list.sort();
 
-    list.print_list();
+  list.print_list();
 
-    list.deleteNodeGivenValue(3);
+  list.deleteNodeGivenValue(3);
 
-    list.print_list();
+  list.print_list();
 
-    list.deleteNodeGivenValue(10);
+  list.deleteNodeGivenValue(10);
 
-    list.print_list();
+  list.print_list();
 
-    list.deleteNodeGivenValue(1);
+  list.deleteNodeGivenValue(1);
 
-    list.print_list();
+  list.print_list();
 
-    return 0;
+  return 0;
 }

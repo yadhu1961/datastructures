@@ -125,6 +125,7 @@ public:
     return false;   // when element not found, hence cannot be deleted
   }
 
+  // Bubble sort implementation
   bool sort()
   {
     std::cout << "Sorting List\n";

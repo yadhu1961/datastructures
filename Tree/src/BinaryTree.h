@@ -86,8 +86,6 @@ private:
     {
       displayImpl(node->right, level + 1);
       std::cout << std::endl;
-      // if (node == root)
-      //   std::cout << "Root -> ";
       for (i = 0; i < level && node != root; i++)
         std::cout << "   ";
       std::cout << node->data;
@@ -144,16 +142,6 @@ private:
     }
 
     return std::max(1 + getTreeHeightImpl(node->left), 1 + getTreeHeightImpl(node->right));
-
-    // if (node->left != nullptr || node->right != nullptr)
-    // {
-    //   ++level;
-    // }
-
-    // getTreeHeightImpl(node->left);
-    // getTreeHeightImpl(node->right);
-
-    // return level;
   }
 
   Node* root{nullptr};

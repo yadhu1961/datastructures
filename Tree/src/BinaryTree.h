@@ -27,9 +27,9 @@ public:
     return addNodeImpl(data, *root);
   }
 
-  bool removeNode(const T& data) {}
+  bool removeNode(const T& data) { return false; }
 
-  bool searchNode(const T& data) const {}
+  bool searchNode(const T& data) const { return false; }
 
   void printTree() const
   {
@@ -48,7 +48,7 @@ public:
     std::cout << "\n\n";
   }
 
-  std::size_t size() const {}
+  std::size_t size() const { return -1; }
 
   std::size_t getTreeHeight() const
   {
@@ -60,7 +60,7 @@ public:
     return std::max(getTreeHeightImpl(root->left), getTreeHeightImpl(root->right));
   }
 
-  std::size_t nodeLevel() const {}
+  std::size_t nodeLevel() const { return -1; }
 
 private:
   void visualPrintImpl(Node* p, int indent = 0)
@@ -112,7 +112,7 @@ private:
 
     Node* nextNode = leftNode->left != nullptr && leftNode->right != nullptr ? leftNode : rightNode;
 
-    addNodeImpl(data, *(nextNode));
+    return addNodeImpl(data, *(nextNode));
   }
 
   void printTreeImpl(Node* node) const

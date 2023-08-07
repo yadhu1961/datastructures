@@ -11,7 +11,7 @@ project(BinaryTree
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 add_executable(binarytree_test src/BinaryTree_driver.cpp)
 
@@ -20,7 +20,7 @@ add_compile_options(-Wall -Wextra -Wpedantic, -fpermissive, -g)
 add_custom_command(
     TARGET binarytree_test
     POST_BUILD
-    COMMAND bin/binarytree_test
+    COMMAND ${CMAKE_SOURCE_DIR}/bin/binarytree_test
     DEPENDS binarytree_test
     COMMENT "Running binary tree example implementation test"
 )

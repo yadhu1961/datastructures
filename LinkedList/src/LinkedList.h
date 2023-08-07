@@ -39,6 +39,7 @@ public:
         std::cout << "Error: Memory allocation failed, couldn't add element\n";
         return false;
       }
+      return true;
     };
 
     if (head == nullptr)
@@ -128,10 +129,10 @@ public:
   // Bubble sort implementation
   bool sort()
   {
-    std::cout << "Sorting List\n";
     if (head == nullptr || head->next == nullptr)
     {
-      return true;
+      std::cout << "Empty list, sorting not needed\n";
+      return false;
     }
 
     Node *curr1 = head;
@@ -148,6 +149,7 @@ public:
       }
       curr1 = curr1->next;
     }
+    return false;
   }
 
 private:

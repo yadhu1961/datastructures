@@ -62,7 +62,35 @@ public:
 
   std::size_t nodeLevel() const { return -1; }
 
+  ~BinaryTree()
+  {
+    if (root == nullptr)
+    {
+      return;
+    }
+    clearTree(root);
+  }
+
 private:
+  void clearTree(Node* node)
+  {
+    if (node == nullptr)
+      return;
+
+    if (node->right == nullptr && node->left == nullptr)
+    {
+      std::cout << "Freeing leaf node address " << node << ", data: " << node->data << std::endl;
+      delete node;
+    }
+    else
+    {
+      clearTree(node->right);
+      clearTree(node->left);
+      std::cout << "Freeing parent node address " << node << ", data: " << node->data << std::endl;
+      delete node;
+    }
+  }
+
   void visualPrintImpl(Node* p, int indent = 0)
   {
     if (p != NULL)

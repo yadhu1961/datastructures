@@ -24,12 +24,12 @@ public:
       return true;
     }
 
-    return addNodeImpl(data, *root);
+    return addNodeImpl(data, root);
   }
 
   bool removeNode(const T& data) { return false; }
 
-  bool searchNode(const T& data) const { return false; }
+  bool searchNode(const T& data) const { return searchNodeImpl(data, root); }
 
   void printTree() const
   {
@@ -93,26 +93,32 @@ private:
     }
   }
 
-  bool addNodeImpl(const T& data, Node& node)
+  bool addNodeImpl(const T& data, Node* node)
   {
-    if (node.left == nullptr)
+    if (data <= node->data)
     {
-      node.left = new Node(data);
-      return true;
+      if (node->left == nullptr)
+      {
+        node->left = new Node(data);
+        return true;
+      }
+      else
+      {
+        return addNodeImpl(data, node->left);
+      }
     }
-
-    if (node.right == nullptr)
+    else
     {
-      node.right = new Node(data);
-      return true;
+      if (node->right == nullptr)
+      {
+        node->right = new Node(data);
+        return true;
+      }
+      else
+      {
+        return addNodeImpl(data, node->right);
+      }
     }
-
-    Node* leftNode  = node.left;
-    Node* rightNode = node.right;
-
-    Node* nextNode = leftNode->left != nullptr && leftNode->right != nullptr ? leftNode : rightNode;
-
-    return addNodeImpl(data, *(nextNode));
   }
 
   void printTreeImpl(Node* node) const
@@ -131,6 +137,29 @@ private:
     if (node->right != nullptr)
     {
       printTreeImpl(node->right);
+    }
+  }
+
+  bool searchNodeImpl(T data, Node* node) const
+  {
+    if (node == nullptr)
+    {
+      return false;
+    }
+
+    if (node->data == data)
+    {
+      std::cout << "Found at address: " << node << std::endl;
+      return true;
+    }
+
+    if (data < node->data)
+    {
+      return searchNodeImpl(data, node->left);
+    }
+    else
+    {
+      return searchNodeImpl(data, node->right);
     }
   }
 

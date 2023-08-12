@@ -79,14 +79,14 @@ private:
 
     if (node->right == nullptr && node->left == nullptr)
     {
-      std::cout << "Freeing leaf node address " << node << ", data: " << node->data << std::endl;
+      std::cout << "Freeing leaf node, address " << node << ", data: " << node->data << std::endl;
       delete node;
     }
     else
     {
       clearTree(node->right);
       clearTree(node->left);
-      std::cout << "Freeing parent node address " << node << ", data: " << node->data << std::endl;
+      std::cout << "Freeing parent node, address " << node << ", data: " << node->data << std::endl;
       delete node;
     }
   }

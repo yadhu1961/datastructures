@@ -1,0 +1,2 @@
+Why aligned is taking more time than unaligned?
+    Ask this question in on stack overflow.

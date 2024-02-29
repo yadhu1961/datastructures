@@ -24,11 +24,13 @@ void* aligned_malloc(int size, unsigned int alignment)
 
 /*
 4 bytes, 8 byte aligned + 1 byte ==> 13 bytes
+offset = 7
 X           o X
 1 2 3 4 5 6 7 8 9 10 11 12 13
 
 4 bytes, 8 byte aligned, + 1 byte ==> 13 bytes
 offset = 0.
+X             o X
 0 1 2 3 4 5 6 7 8  9 10 11 12
 
 8 bytes, 4 byte aligned + 1 byte ==> 13 bytes
@@ -37,7 +39,8 @@ X           o X
 
 8 bytes, 4 byte aligned, + 1 byte ==> 13 bytes
 offset = 0.
-0 1 2 3 4 5 6 7 8  9 10 11 12
+X     o X
+0 1 2 3 4 5 6 7 8 9 10 11 12
 
 */
 

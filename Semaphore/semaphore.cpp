@@ -3,7 +3,7 @@
 #include <semaphore>
 #include <thread>
 
-#define MAX_VAL 3
+#define MAX_VAL 10
 // global binary semaphore instances
 // object counts are set to zero
 // objects are in non-signaled state
@@ -86,6 +86,6 @@ int main()
   thrWorkerOdd.join();
   thrWorkerEven.join();
 
-  std::cout << "All threads finished their work";
+  std::cout << "\nAll threads finished their work\n";
   return 0;
 }

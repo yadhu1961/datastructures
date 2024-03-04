@@ -7,7 +7,9 @@
 #include "queue.h"
 
 /**
- * Produces
+ * Produces 2 bytes in first 2ms
+ * and 6 bytes in next 6ms
+ * Runs indefinitely.
  */
 void *producer()
 {
@@ -68,6 +70,9 @@ void readBytes()
   }
 }
 
+/**
+ * Consumer thread, consumes 2 bytes for every 2ms
+ */
 void *consumer()
 {
   while (1)
